@@ -1,0 +1,17 @@
+version: "3.6"
+services:
+        servidor-vault:
+                image: vault
+                container_name: servidor-vault
+                expose:
+                        - "8200"
+                ports:
+                        - 8200:8200
+
+        app:
+                build: docker/
+                container_name: app-vault
+                depends_on:
+                        - servidor-vault
+                stdin_open: true
+                tty: true
