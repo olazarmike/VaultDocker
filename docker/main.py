@@ -1,6 +1,12 @@
+import export as export
 import hvac
+import os
 
-client = hvac.Client(url='https://localhost:8200')
+client = hvac.Client()
+client = hvac.Client(
+    url='https://localhost:8200',
+    token=os.environ['VAULT_TOKEN']
+)
 client.is_authenticated()
 
 # Authenticate to Vault using client.auth.x

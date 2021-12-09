@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cliente-job
+  labels:
+    app: cliente
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cliente
+          image: mikelolazar/vault
+          env:
+            - name: VAULT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: api-secrets
+                  key: VAULT_TOKEN
+            - name: service
+              value: vault-service
+          

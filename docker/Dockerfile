@@ -7,7 +7,7 @@ RUN apt -qq update
 #Crear enviroment
 RUN apt install python3-pip -y
 
-RUN export VAULT_ADDR='http://0.0.0.0:8200/'
+RUN export VAULT_ADDR='http://localhost:8200/'
 
 #ejecutar main
 COPY main.py /programa/main.py

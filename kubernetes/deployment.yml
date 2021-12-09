@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault
+  labels:
+    app: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - name: vault
+        image: vault
+        env:
+        - name: VAULT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: api-secrets
+              key: VAULT_TOKEN
+        ports:
+        - containerPort: 8200
+          name: db-container
+        volumeMounts:
+          - name: vault-persistent-storage
+            mountPath: /var/lib/vault
+      volumes:
+        - name: vault-persistent-storage
+          persistentVolumeClaim:
+            claimName: pv-claim
