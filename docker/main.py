@@ -1,4 +1,3 @@
-import export as export
 import hvac
 import os
 
@@ -8,11 +7,6 @@ client = hvac.Client(
     token=os.environ['VAULT_TOKEN']
 )
 client.is_authenticated()
-
-# Authenticate to Vault using client.auth.x
-
-# Not all these settings may apply to your setup, refer to Vault
-# documentation for context of what to use here
 
 #crear una tabla
 config_response = client.secrets.activedirectory.configure(

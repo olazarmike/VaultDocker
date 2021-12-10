@@ -1,20 +1,22 @@
 version: "3.6"
 services:
-        servidor-vault:
-                image: vault
-                container_name: servidor-vault
+        servidor-vault: #servidor vault
+                image: vault    #voy a importar la imagen de docker hub de vault
+                container_name: servidor-vault  #nombre del container que va a tener la imagen
                 expose:
                         - "8200"
-                ports:
+                ports:          #el servidor va a utilizar el puerto 8200
                         - 8200:8200
                 environment:
                         VAULT_SERVER: "http://localhost:8200"
-                        VAULT_TOKEN: my-token
+                        VAULT_TOKEN: "s.diElVGB6gKQdBlOPJ531U8BL"
 
-        app:
-                build: docker/
-                container_name: app-vault
+        app:            #servidor app para la aplicacion
+                build: docker/  #en que directorio esta el dockerfile
+                container_name: app-vault       #nombre del contaier
                 depends_on:
                         - servidor-vault
                 stdin_open: true
                 tty: true
+
+#
